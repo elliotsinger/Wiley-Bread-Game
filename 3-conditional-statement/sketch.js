@@ -1,16 +1,9 @@
 //create an empty array called balls
 let balls = [];
-let crocodile;
 
 //create a variable to hold your avatar
 let me;
-let mySound;
 
-function preload() {
-  soundFormats('mp3', 'ogg', 'wav');
-  mySound = loadSound('cartoonexplosion.wav');
-  crocodile = loadImage ('crocodiledrawing.png');
-}
 
 function setup() {
   createCanvas(500, 400);
@@ -29,7 +22,7 @@ function draw(){
   if (frameCount % 25 == 0) {
       let  b = new Ball(width, random(0,height), -3);
       balls.push(b);
-
+      console.log(balls); //print the balls array to the console
     }
 
 //	draw all the balls in that array
@@ -47,11 +40,20 @@ class Avatar {
 	constructor(x,y, speed){ //every avatar needs an x value, a y value, and a speed
 		    this.x = x;
     		this.y = y;
-        this.speed = speed;
+        this.speed = random(1,5);
 	}
 
 	drawMe(){  // draw the running person
-    	  image (crocodile, this.x, this.y);
+    		stroke("green");
+        strokeWeight(3);
+    		fill("blue");
+		    ellipse(this.x,this.y,20,20);
+        line(this.x,this.y, this.x, this.y+40);
+        line(this.x, this.y+40, this.x-20, this.y+60);
+        line(this.x, this.y+40, this.x+10, this.y+50);
+        line(this.x+10, this.y+50, this.x+5, this.y+60);
+        line(this.x, this.y+15, this.x-10, this.y+25);
+        line(this.x-10, this.y+25, this.x+10, this.y+35);
 	}
 
 	moveMe(){
@@ -85,22 +87,20 @@ class Ball {
 	drawBall(){
     	stroke(0);
       strokeWeight(1);
-    	fill("purple");
-		  triangle(this.x,this.y, this.x+40, this. y, this.x+20, this.y+20);
+    	fill("red");
+		  ellipse(this.x,this.y,10,10);
 	}
 
 	//update the location of the ball, so it moves across the screen
 	moveBall(){
 		this.x = this.x+ this.speed;
-		this.y = this.y+.5;
+		this.y = this.y+random(.5,5);
 	}
 
 	//if the ball hits the person, change the speed value to negative (send it in the opposite direction)
   	bounceBall(){
     		if (this.x >= me.x-15 && this.x <= me.x+15 && this.y > me.y-40 && this.y < me.y+40){
       			this.speed = -this.speed;
-            mySound.setVolume(0.1);
-            mySound.play();
     		}
   	}
 
