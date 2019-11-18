@@ -9,7 +9,7 @@ function setup() {
   createCanvas(500, 400);
 
   //make one avatar called me
-  me = new Avatar(width/2, 300, 3);
+  me = new Avatar(width/2, height/2, 3);
 
 }
 
@@ -19,10 +19,16 @@ function draw(){
   me.drawMe();
   me.moveMe();
 
-  if (frameCount % 25 == 0) {
+  if (frameCount % 100 == 0) {
       let  b = new Ball(width, random(0,height), -3);
       balls.push(b);
       console.log(balls); //print the balls array to the console
+    }
+
+if (frameCount % 100 == 0) {
+        let  b = new Ball(0, random(0,height), 3);
+        balls.push(b);
+        console.log(balls); //print the balls array to the console
     }
 
 //	draw all the balls in that array
@@ -64,6 +70,13 @@ class Avatar {
     if (keyIsDown(DOWN_ARROW)) { // if you hold the down arrow, move down by speed
         this.y += this.speed;
     }
+    if (keyIsDown(LEFT_ARROW)) { // if you hold the down arrow, move down by speed
+        this.x -= this.speed;
+    }
+
+    if (keyIsDown(RIGHT_ARROW)) { // if you hold the down arrow, move down by speed
+        this.x += this.speed;
+      }
 	}
 
   die(){
@@ -81,6 +94,7 @@ class Ball {
 		this.x = x;
     this.y = y;
     this.speed = speed;
+
 	}
 
 	// draw a ball on the screen at x,y
@@ -94,7 +108,7 @@ class Ball {
 	//update the location of the ball, so it moves across the screen
 	moveBall(){
 		this.x = this.x+ this.speed;
-		this.y = this.y+random(.5,5);
+		//this.y = this.y+random(.5,5);
 	}
 
 	//if the ball hits the person, change the speed value to negative (send it in the opposite direction)
@@ -103,5 +117,4 @@ class Ball {
       			this.speed = -this.speed;
     		}
   	}
-
 }
