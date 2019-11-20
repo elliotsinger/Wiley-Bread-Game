@@ -19,13 +19,13 @@ function draw(){
   me.drawMe();
   me.moveMe();
 
-  if (frameCount % 100 == 0) {
+  if (frameCount % 50 == 0) {
       let  b = new Ball(width, random(0,height), -3);
       balls.push(b);
       console.log(balls); //print the balls array to the console
     }
 
-if (frameCount % 100 == 0) {
+if (frameCount % 50 == 0) {
         let  b = new Ball(0, random(0,height), 3);
         balls.push(b);
         console.log(balls); //print the balls array to the console
@@ -109,6 +109,15 @@ class Ball {
 	moveBall(){
 		this.x = this.x+ this.speed;
 		//this.y = this.y+random(.5,5);
+    if (this.y <200){
+      //slope = [y+{200-y}]/250);
+      this.y = this.y+(200+this.y)/250;
+    }
+    if (this.y >200){
+    //  slope = [y-{200-y}]/250);
+    this.y = this.y -(200+this.y)/250;
+    }
+
 	}
 
 	//if the ball hits the person, change the speed value to negative (send it in the opposite direction)
