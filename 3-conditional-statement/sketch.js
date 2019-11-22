@@ -3,7 +3,7 @@ let balls = [];
 
 //create a variable to hold your avatar
 let me;
-
+let breadroll;
 
 function setup() {
   createCanvas(500, 400);
@@ -12,21 +12,31 @@ function setup() {
   me = new Avatar(width/2, height/2, 3);
 
 }
+function preload(){
+  breadroll = loadImage('breadroll.png')
+}
 
 function draw(){
 	background(220);
+  image(breadroll, 0, 0);
 
   me.drawMe();
   me.moveMe();
 
+  strokeWeight(4);
+  stroke(51);
+  fill(0,0,0, 10);
+  rect(200, 175, 100, 50);
+
+
   if (frameCount % 50 == 0) {
-      let  b = new Ball(width, random(0,height), -3);
+      let  b = new Ball(width, random(0,height), -3, false);
       balls.push(b);
       console.log(balls); //print the balls array to the console
     }
 
 if (frameCount % 50 == 0) {
-        let  b = new Ball(0, random(0,height), 3);
+        let  b = new Ball(0, random(0,height), 3, false);
         balls.push(b);
         console.log(balls); //print the balls array to the console
     }
@@ -90,10 +100,11 @@ class Avatar {
 class Ball {
 
 	//every ball needs an x value, a y value, and a speed
-	constructor(x,y, speed){
+	constructor(x,y, speed, hitWiley){
 		this.x = x;
     this.y = y;
     this.speed = speed;
+    this.hitWiley = hitWiley
 
 	}
 
@@ -122,8 +133,9 @@ class Ball {
 
 	//if the ball hits the person, change the speed value to negative (send it in the opposite direction)
   	bounceBall(){
-    		if (this.x >= me.x-15 && this.x <= me.x+15 && this.y > me.y-40 && this.y < me.y+40){
+    		if (this.x >= me.x-15 && this.x <= me.x+15 && this.y > me.y-30 && this.y < me.y+60 && this.hitWiley == false){
       			this.speed = -this.speed;
+            this.hitWiley = true
     		}
   	}
 }
