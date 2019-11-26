@@ -1,9 +1,15 @@
 //create an empty array called balls
-let balls = [];
+let students = [];
+let slices = [];
 
 //create a variable to hold your avatar
 let me;
 let breadroll;
+
+function preload(){
+  breadroll = loadImage('breadroll.png')
+}
+
 
 function setup() {
   createCanvas(500, 400);
@@ -11,42 +17,56 @@ function setup() {
   //make one avatar called me
   me = new Avatar(width/2, height/2, 3);
 
+  for (let i = 0; i < 300; i++){
+      let b = new Bread(random (175,315), random (150,240));
+      slices.push(b);
+      print(slices);
+  }
+
+
 }
-function preload(){
-  breadroll = loadImage('breadroll.png')
-}
+
 
 function draw(){
 	background(220);
-  image(breadroll, 0, 0);
 
-  me.drawMe();
-  me.moveMe();
+
+
 
   strokeWeight(4);
   stroke(51);
   fill(0,0,0, 10);
-  rect(200, 175, 100, 50);
+  rect(175, 150, 150, 100);
 
+  for (let i = 0; i < slices.length; i++) {
+          slices[i].drawBread()
 
-  if (frameCount % 50 == 0) {
-      let  b = new Ball(width, random(0,height), -3, false);
-      balls.push(b);
-      console.log(balls); //print the balls array to the console
     }
 
-if (frameCount % 50 == 0) {
-        let  b = new Ball(0, random(0,height), 3, false);
-        balls.push(b);
-        console.log(balls); //print the balls array to the console
+    me.drawMe();
+    me.moveMe();
+
+  if (frameCount % 100 == 0) {
+      let  b = new Students(width, random(0,height), -3, false);
+      students.push(b);
+    //  console.log(balls); //print the balls array to the console
+    }
+
+if (frameCount % 100 == 0) {
+        let  b = new Students(0, random(0,height), 3, false);
+        students.push(b);
+      //  console.log(balls); //print the balls array to the console
     }
 
 //	draw all the balls in that array
-	for (let i = 0; i < balls.length; i++) {
-	 	      balls[i].drawBall();
-       	  balls[i].moveBall();
-        	balls[i].bounceBall();
+	for (let i = 0; i < students.length; i++) {
+	 	      students[i].drawStudents();
+       	  students[i].moveStudents();
+        	students[i].loseBread();
+          students[i].takeBread();
 	  }
+
+
 
 }
 
@@ -97,7 +117,7 @@ class Avatar {
 
 
 //ball class from which to create new balls with similar properties.
-class Ball {
+class Students {
 
 	//every ball needs an x value, a y value, and a speed
 	constructor(x,y, speed, hitWiley){
@@ -109,7 +129,7 @@ class Ball {
 	}
 
 	// draw a ball on the screen at x,y
-	drawBall(){
+	drawStudents(){
     	stroke(0);
       strokeWeight(1);
     	fill("red");
@@ -117,7 +137,7 @@ class Ball {
 	}
 
 	//update the location of the ball, so it moves across the screen
-	moveBall(){
+	moveStudents(){
 		this.x = this.x+ this.speed;
 		//this.y = this.y+random(.5,5);
     if (this.y <200){
@@ -131,11 +151,33 @@ class Ball {
 
 	}
 
+takeBread (){
+  for(let i=0; i<slices.length; i++){
+    if (this.x>= slices [i].x && this.x<= slices[i].x + 20 && this.y <=slices[i].y && this.y <=slices[i].y + 20){
+      slices[i].x = this.x
+      slices[i].y = this.y
+    }
+  }
+
+}
+
 	//if the ball hits the person, change the speed value to negative (send it in the opposite direction)
-  	bounceBall(){
+  	loseBread(){
     		if (this.x >= me.x-15 && this.x <= me.x+15 && this.y > me.y-30 && this.y < me.y+60 && this.hitWiley == false){
       			this.speed = -this.speed;
             this.hitWiley = true
     		}
   	}
+}
+
+class Bread {
+constructor(x,y){
+  this.x = x;
+  this.y = y;
+}
+
+drawBread (){
+  image(breadroll, this.x, this.y);
+
+  }
 }
