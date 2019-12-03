@@ -18,9 +18,9 @@ function setup() {
   me = new Avatar(width/2, height/2, 3);
 
   for (let i = 0; i < 300; i++){
-      let b = new Bread(random (175,315), random (150,240));
+      let b = new Bread(random (175,315), random (150,240),false);
       slices.push(b);
-      print(slices);
+
   }
 
 
@@ -39,7 +39,7 @@ function draw(){
   rect(175, 150, 150, 100);
 
   for (let i = 0; i < slices.length; i++) {
-          slices[i].drawBread()
+          slices[i].drawBread();
 
     }
 
@@ -53,7 +53,8 @@ function draw(){
     }
 
 if (frameCount % 100 == 0) {
-        let  b = new Students(0, random(0,height), 3, false);
+        let  b = new Students(0, random(0,height), 3, false, false);
+
         students.push(b);
       //  console.log(balls); //print the balls array to the console
     }
@@ -120,11 +121,12 @@ class Avatar {
 class Students {
 
 	//every ball needs an x value, a y value, and a speed
-	constructor(x,y, speed, hitWiley){
+	constructor(x,y, speed, hitWiley, hasBread){
 		this.x = x;
     this.y = y;
     this.speed = speed;
-    this.hitWiley = hitWiley
+    this.hitWiley = hitWiley;
+    this.hasBread = hasBread;
 
 	}
 
@@ -153,9 +155,10 @@ class Students {
 
 takeBread (){
   for(let i=0; i<slices.length; i++){
-    if (this.x>= slices [i].x && this.x<= slices[i].x + 20 && this.y <=slices[i].y && this.y <=slices[i].y + 20){
-      slices[i].x = this.x
-      slices[i].y = this.y
+    if (this.x>= slices [i].x && this.x<= slices[i].x + 10 && this.y <=slices[i].y && this.y <=slices[i].y + 10 && this.hasBread == false){
+      slices[i].follow = true
+      this.hasBread = true
+      print("got a bread")
     }
   }
 
@@ -164,20 +167,36 @@ takeBread (){
 	//if the ball hits the person, change the speed value to negative (send it in the opposite direction)
   	loseBread(){
     		if (this.x >= me.x-15 && this.x <= me.x+15 && this.y > me.y-30 && this.y < me.y+60 && this.hitWiley == false){
-      			this.speed = -this.speed;
-            this.hitWiley = true
+          this.hitWiley = true
+          this.speed = this.speed;
+
     		}
   	}
 }
 
 class Bread {
-constructor(x,y){
+constructor(x,y, follow){
   this.x = x;
   this.y = y;
+  this.follow = follow;
+
 }
 
 drawBread (){
   image(breadroll, this.x, this.y);
+}
 
+moveBread (){
+for(let i=0; i<students.length; i++){
+  if (this.hasBread = true){
+    this.follow = true
+    // this.x = students[i].x
+    // this.y = students[i].y
+
+ this.x = 100;
+ this.y = 100;
+
+      }
+    }
   }
 }
