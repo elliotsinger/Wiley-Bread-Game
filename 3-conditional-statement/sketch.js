@@ -5,9 +5,11 @@ let slices = [];
 let me;
 let breadroll;
 let score = 0;
+let wileypic;
 
 function preload(){
   breadroll = loadImage('breadroll.png')
+  wileypic = loadImage('wiley.png')
 }
 
 
@@ -67,16 +69,17 @@ class Avatar {
 	}
 
 	drawMe(){  // draw the running person
-    		stroke("green");
-        strokeWeight(3);
-    		fill("blue");
-		    ellipse(this.x,this.y,20,20);
-        line(this.x,this.y, this.x, this.y+40);
-        line(this.x, this.y+40, this.x-20, this.y+60);
-        line(this.x, this.y+40, this.x+10, this.y+50);
-        line(this.x+10, this.y+50, this.x+5, this.y+60);
-        line(this.x, this.y+15, this.x-10, this.y+25);
-        line(this.x-10, this.y+25, this.x+10, this.y+35);
+    image(wileypic, 0, 0);
+    		// stroke("green");
+        // strokeWeight(3);
+    		// fill("blue");
+		    // ellipse(this.x,this.y,20,20);
+        // line(this.x,this.y, this.x, this.y+40);
+        // line(this.x, this.y+40, this.x-20, this.y+60);
+        // line(this.x, this.y+40, this.x+10, this.y+50);
+        // line(this.x+10, this.y+50, this.x+5, this.y+60);
+        // line(this.x, this.y+15, this.x-10, this.y+25);
+        // line(this.x-10, this.y+25, this.x+10, this.y+35);
 	}
 
 	moveMe(){
