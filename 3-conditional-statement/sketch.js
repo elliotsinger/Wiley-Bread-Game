@@ -4,6 +4,7 @@ let slices = [];
 //create a variable to hold your avatar
 let me;
 let breadroll;
+let score = 0;
 
 function preload(){
   breadroll = loadImage('breadroll.png')
@@ -15,9 +16,10 @@ function setup() {
   //make one avatar called me
   me = new Avatar(width/2, height/2, 3);
 
-  for (let i = 0; i < 300; i++){
-      let b = new Bread(random (175,315), random (150,240),false);
+  for (let i = 0; i < 100; i++){
+      let b = new Bread(random (200,315), random (175,240),false);
       slices.push(b);
+
   }
 }
 
@@ -26,7 +28,7 @@ function draw(){
   strokeWeight(4);
   stroke(51);
   fill(0,0,0, 10);
-  rect(175, 150, 150, 100);
+  rect(200, 175, 125, 75);
 
   for (let i = 0; i < slices.length; i++) {
           slices[i].drawBread();
@@ -36,12 +38,12 @@ function draw(){
     me.drawMe();
     me.moveMe();
 
-  if (frameCount % 100 == 0) {
+  if (frameCount % 200 == 0) {
       let  b = new Students(width, random(0,height), -3, false, "not yet");
       students.push(b);
     }
 
-if (frameCount % 100 == 0) {
+if (frameCount % 200 == 0) {
         let  b = new Students(0, random(0,height), 3, false, "not yet");
         students.push(b);
     }
@@ -61,7 +63,7 @@ class Avatar {
 	constructor(x,y, speed){ //every avatar needs an x value, a y value, and a speed
 		    this.x = x;
     		this.y = y;
-        this.speed = random(1,5);
+        this.speed = (5,5);
 	}
 
 	drawMe(){  // draw the running person
@@ -95,6 +97,7 @@ class Avatar {
 	}
 
   die(){
+    // ifbreadrolls= 0, then game over
 
   }
 
@@ -111,10 +114,16 @@ class Students {
 	}
 
 	drawStudents(){
-    	stroke(0);
-      strokeWeight(1);
-    	fill("red");
-		  ellipse(this.x,this.y,10,10);
+    stroke("purple");
+    strokeWeight(3);
+    fill("black");
+    ellipse(this.x,this.y,20,20);
+    line(this.x,this.y, this.x, this.y+40);
+    line(this.x, this.y+40, this.x-20, this.y+60);
+    line(this.x, this.y+40, this.x+10, this.y+50);
+    line(this.x+10, this.y+50, this.x+5, this.y+60);
+    line(this.x, this.y+15, this.x-10, this.y+25);
+    line(this.x-10, this.y+25, this.x+10, this.y+35);
       if(this.hasBread == "yes"){
         image(breadroll, this.x+1, this.y);
       }
@@ -147,6 +156,7 @@ takeBread (){
           this.speed = -this.speed;
           print("hit Wiley")
           this.hasBread = "drop it"
+          score=score+1
 
     		}
   	}
