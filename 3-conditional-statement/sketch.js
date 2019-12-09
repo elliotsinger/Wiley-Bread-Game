@@ -69,7 +69,7 @@ class Avatar {
 	}
 
 	drawMe(){  // draw the running person
-    image(wileypic, 0, 0);
+    image(wileypic, this.x, this.y);
     		// stroke("green");
         // strokeWeight(3);
     		// fill("blue");
