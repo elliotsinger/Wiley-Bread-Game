@@ -4,8 +4,11 @@ let slices = [];
 //create a variable to hold your avatar
 let me;
 let breadroll;
-let score = 0;
 let wileypic;
+let sign;
+let instructions;
+let instructions2;
+let score = 0
 
 function preload(){
   breadroll = loadImage('breadroll.png')
@@ -22,15 +25,41 @@ function setup() {
       let b = new Bread(random (200,315), random (175,240),false);
       slices.push(b);
 
+
   }
 }
 
 function draw(){
-	background(220);
+	background(255, 221, 0);
   strokeWeight(4);
   stroke(51);
   fill(0,0,0, 10);
   rect(200, 175, 125, 75);
+
+    let sign = 'Ann Maisel Caf';
+    color(246, 255, 0);
+    textSize(30);
+    fill(255, 255, 255);
+    noStroke();
+    text(sign, 10, 30);
+
+    let instructions = 'You are Ms. Wiley and your mission is to protect the bread from bread-stealing frosh!';
+    textSize(12.5);
+    fill(0, 0, 0);
+    noStroke();
+    text(instructions, 10, 378);
+
+    let instructions2 = 'Use the arrow keys to move Ms. Wiley and take back the bread!';
+    textSize(12.5);
+    fill(0, 0, 0);
+    noStroke();
+    text(instructions2, 10, 395);
+
+
+    text("score = " + score, 400, 20);
+
+
+
 
   for (let i = 0; i < slices.length; i++) {
           slices[i].drawBread();
@@ -117,9 +146,9 @@ class Students {
 	}
 
 	drawStudents(){
-    stroke("purple");
+    stroke(130, 13, 19);
     strokeWeight(3);
-    fill("black");
+    fill(24, 27, 186);
     ellipse(this.x,this.y,20,20);
     line(this.x,this.y, this.x, this.y+40);
     line(this.x, this.y+40, this.x-20, this.y+60);
@@ -132,6 +161,7 @@ class Students {
       }
       if(this.hasBread == "drop it"){
         print("fall bread!")
+
 
       }
 	}
@@ -159,7 +189,12 @@ takeBread (){
           this.speed = -this.speed;
           print("hit Wiley")
           this.hasBread = "drop it"
+          if (this.hasBread == "yes"){
           score=score+1
+          }
+
+
+
 
     		}
   	}
@@ -182,6 +217,8 @@ dropBread(){
    for(let i=0; i<students.length; i++){
      if (students[i].hasBread == "yes" && students[i].hitWiley == true){
        students[i].hasBread == "drop it"
+
+
          }
        }
  }
