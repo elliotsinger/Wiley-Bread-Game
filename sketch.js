@@ -9,6 +9,7 @@ let sign;
 let instructions;
 let instructions2;
 let score = 0
+let instructions3;
 
 function preload(){
   breadroll = loadImage('breadroll.png')
@@ -47,16 +48,22 @@ function draw(){
     textSize(12.5);
     fill(0, 0, 0);
     noStroke();
-    text(instructions, 10, 378);
+    text(instructions, 10, 375);
 
     let instructions2 = 'Use the arrow keys to move Ms. Wiley and take back the bread!';
     textSize(12.5);
     fill(0, 0, 0);
     noStroke();
-    text(instructions2, 10, 395);
+    text(instructions2, 10, 387);
+
+    let instructions3 = 'Ms. Wiley doesnt sit in the breadbox, so neither should you,';
+    textSize(12.5);
+    fill(0, 0, 0);
+    noStroke();
+    text(instructions3, 10, 395);
 
 
-    text("score = " + score, 400, 20);
+    // text("score = " + score, 400, 20);
 
 
 
