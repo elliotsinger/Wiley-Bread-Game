@@ -190,9 +190,7 @@ takeBread (){
           print("hit Wiley")
           this.hasBread = "drop it"
           if (this.hasBread == "yes"){
-          score=score+1
           }
-
 
 
 
@@ -217,7 +215,7 @@ dropBread(){
    for(let i=0; i<students.length; i++){
      if (students[i].hasBread == "yes" && students[i].hitWiley == true){
        students[i].hasBread == "drop it"
-
+       score=score+1;
 
          }
        }
