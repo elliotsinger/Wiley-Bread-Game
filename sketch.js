@@ -48,19 +48,19 @@ function draw(){
     textSize(12.5);
     fill(0, 0, 0);
     noStroke();
-    text(instructions, 10, 370);
+    text(instructions, 10, 367);
 
     let instructions2 = 'Use the arrow keys to move Ms. Wiley and take back the bread!';
     textSize(12.5);
     fill(0, 0, 0);
     noStroke();
-    text(instructions2, 10, 383);
+    text(instructions2, 10, 380);
 
-    let instructions3 = 'Ms. Wiley doesnt sit in the breadbox, so neither should you,';
+    let instructions3 = 'Ms. Wiley doesnt sit in the breadbox, so neither should you!';
     textSize(12.5);
     fill(0, 0, 0);
     noStroke();
-    text(instructions3, 10, 395);
+    text(instructions3, 10, 394);
 
 
     // text("score = " + score, 400, 20);
